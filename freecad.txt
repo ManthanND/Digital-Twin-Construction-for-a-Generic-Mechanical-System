@@ -1,0 +1,19 @@
+import serial
+from PySide import QtCore
+ser = serial.Serial('COM5', 9600)
+
+def SERIAL():
+	x = 0
+	y = 0
+	z = 0
+	FreeCAD.ActiveDocument.Badminton_racket_Final.Placement = FreeCAD.Placement(FreeCAD.Vector(0,0,0), FreeCAD.Rotation(x,y,z))
+	servalue = ser.readline()
+	a = servalue.split()
+	x = float(a[0])
+	y = float(a[1])
+	z = float(a[2])
+	FreeCAD.ActiveDocument.Badminton_racket_Final.Placement = FreeCAD.Placement(FreeCAD.Vector(0,0,0), FreeCAD.Rotation(x,y,z))
+
+timer = QtCore.QTimer()
+timer.timeout.connect(SERIAL)
+timer.start(1)
